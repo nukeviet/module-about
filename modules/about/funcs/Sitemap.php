@@ -10,7 +10,7 @@
 if( ! defined( 'NV_IS_MOD_ABOUT' ) ) die( 'Stop!!!' );
 
 $url = array();
-$cacheFile = NV_ROOTDIR . "/" . NV_CACHEDIR . "/" . NV_LANG_DATA . "_" . $module_name . "_Sitemap.cache";
+$cacheFile = NV_ROOTDIR . "/" . NV_CACHEDIR . "/" . NV_LANG_DATA . "_" . $module_name . "_Sitemap_" . NV_CACHE_PREFIX . ".cache";
 $pa = NV_CURRENTTIME - 7200;
 
 if( ( $cache = nv_get_cache( $cacheFile ) ) != false and filemtime( $cacheFile ) >= $pa )
@@ -25,7 +25,7 @@ else
 	while( list( $alias, $publtime ) = $db->sql_fetchrow( $result ) )
 	{
 		$url[] = array( //
-			'link' => NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $alias, //
+			'link' => NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=" . $alias . $global_config['rewrite_exturl'], //
 			'publtime' => $publtime //
 		);
 	}
